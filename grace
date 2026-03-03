@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grace Soap & Cosmetics</title>
+
+  <style>
+    :root {
+      --bg: #f8f5f2;
+      --text: #2d1b12;
+      --accent: #c6898f;
+      --accent-dark: #a66b72;
+      --card: white;
+      --border: #e8d9d0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 90px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--accent-dark);
+    }
+
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: var(--accent);
+      color: white;
+      font-size: 0.68rem;
+      font-weight: bold;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+      gap: 14px;
+      padding: 16px;
+    }
+
+    .product-card {
+      background: var(--card);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.12s, box-shadow 0.12s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    }
+
+    .product-img {
+      height: 140px;
+      background: linear-gradient(135deg, #f9e8e9, #e8d5d8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4.8rem;
+    }
+
+    .product-info {
+      padding: 12px;
+    }
+
+    .product-name {
+      font-size: 0.98rem;
+      font-weight: 500;
+      line-height: 1.35;
+      margin-bottom: 6px;
+      height: 2.7em;
+      overflow: hidden;
+    }
+
+    .product-price {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent-dark);
+      margin-bottom: 8px;
+    }
+
+    .btn-add {
+      background: var(--accent);
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 9px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-add:active {
+      background: var(--accent-dark);
+    }
+
+    .cart-view {
+      padding: 16px;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-img {
+      width: 60px;
+      height: 60px;
+      background: #f9e8e9;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      flex-shrink: 0;
+    }
+
+    .cart-info {
+      flex: 1;
+    }
+
+    .cart-name {
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .cart-price {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .cart-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .qty-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    .qty {
+      width: 36px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .total-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .btn-pay {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      cursor: pointer;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 80px 20px;
+      color: #888;
+      font-size: 1.1rem;
+    }
+
+    .back-btn {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    @media (min-width: 500px) {
+      .products {
+        grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div id="header-title">
+    <h1>Grace Soap</h1>
+  </div>
+  <div class="cart-icon" id="cart-toggle">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="9" cy="21" r="1"/>
+      <circle cx="20" cy="21" r="1"/>
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+    </svg>
+    <span class="cart-count" id="cart-count">0</span>
+  </div>
+</header>
+
+<div id="catalog" class="products">
+  <!-- Products will be inserted here -->
+</div>
+
+<div id="cart-view" class="cart-view" style="display:none;">
+  <div id="cart-items"></div>
+  <div class="empty" id="empty-cart" style="display:none;">Your cart is empty 🛍️</div>
+</div>
+
+<div class="total-bar" id="total-bar" style="display:none;">
+  <span>Total: <strong id="total-price">$0.00</strong></span>
+  <button class="btn-pay" id="pay-btn">Pay Now</button>
+</div>
+
+<script>
+// ──────────────────────────────────────────────
+const products = [
+  { id:1, name:"Lavender Dream Soap",     price: 7.90,  emoji:"🧼" },
+  { id:2, name:"Rose Petal Face Cream",   price:22.50,  emoji:"🌹"  },
+  { id:3, name:"Coconut Hair Mask",       price:18.00,  emoji:"🥥"  },
+  { id:4, name:"Charcoal Detox Bar",      price: 6.80,  emoji:"⚫"  },
+  { id:5, name:"Citrus Body Scrub",       price:14.90,  emoji:"🍋"  },
+  { id:6, name:"Honey & Oat Soap",        price: 8.40,  emoji:"🍯"  },
+];
+
+let cart = [];
+
+// DOM elements
+const catalog    = document.getElementById("catalog");
+const cartView   = document.getElementById("cart-view");
+const cartItems  = document.getElementById("cart-items");
+const totalBar   = document.getElementById("total-bar");
+const totalPrice = document.getElementById("total-price");
+const cartCount  = document.getElementById("cart-count");
+const emptyCart  = document.getElementById("empty-cart");
+const payBtn     = document.getElementById("pay-btn");
+const cartToggle = document.getElementById("cart-toggle");
+const headerTitle= document.getElementById("header-title");
+
+// Render products
+function renderProducts() {
+  catalog.innerHTML = products.map(p => `
+    <div class="product-card">
+      <div class="product-img">${p.emoji}</div>
+      <div class="product-info">
+        <div class="product-name">${p.name}</div>
+        <div class="product-price">$${p.price.toFixed(2)}</div>
+        <button class="btn-add" data-id="${p.id}">Add to Cart</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+// Update cart display
+function renderCart() {
+  if (cart.length === 0) {
+    cartItems.innerHTML = "";
+    emptyCart.style.display = "block";
+    totalBar.style.display = "none";
+    return;
+  }
+
+  emptyCart.style.display = "none";
+  totalBar.style.display = "flex";
+
+  cartItems.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <div class="cart-img">${products.find(p=>p.id===item.id)?.emoji || "🛍️"}</div>
+      <div class="cart-info">
+        <div class="cart-name">${item.name}</div>
+        <div class="cart-price">$${item.price.toFixed(2)}</div>
+      </div>
+      <div class="cart-controls">
+        <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
+        <span class="qty">${item.qty}</span>
+        <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+      </div>
+    </div>
+  `).join("");
+
+  const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+  totalPrice.textContent = `$${total.toFixed(2)}`;
+  cartCount.textContent = cart.reduce((sum, i) => sum + i.qty, 0);
+}
+
+// Add to cart
+document.addEventListener("click", e => {
+  if (e.target.classList.contains("btn-add")) {
+    const id = Number(e.target.dataset.id);
+    const product = products.find(p => p.id === id);
+    if (!product) return;
+
+    const existing = cart.find(i => i.id === id);
+    if (existing) {
+      existing.qty++;
+    } else {
+      cart.push({ ...product, qty: 1 });
+    }
+
+    renderCart();
+  }
+});
+
+// Change quantity
+window.changeQty = (id, delta) => {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+
+  item.qty += delta;
+  if (item.qty < 1) {
+    cart = cart.filter(i => i.id !== id);
+  }
+
+  renderCart();
+};
+
+// Toggle views
+cartToggle.onclick = () => {
+  const showingCart = cartView.style.display !== "none";
+  catalog.style.display  = showingCart ? "grid" : "none";
+  cartView.style.display = showingCart ? "none" : "block";
+
+  headerTitle.innerHTML = showingCart
+    ? `<h1>Grace Soap</h1>`
+    : `<button class="back-btn" onclick="cartToggle.click()">←</button> <h1>Cart</h1>`;
+};
+
+// Pay button (demo)
+payBtn.onclick = () => {
+  const total = cart.reduce((s,i)=>s+i.price*i.qty,0);
+  alert(`Thank you!\n\nOrder total: $${total.toFixed(2)}\n\n(Telegram Mini App demo — payment would go here)`);
+  cart = [];
+  renderCart();
+  cartToggle.click(); // go back to catalog
+};
+
+// Init
+renderProducts();
+renderCart();
+
+</script>
+</body>
+</html>
