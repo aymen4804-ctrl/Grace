@@ -22,7 +22,6 @@
       --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
       --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
     @media (prefers-color-scheme: dark) {
       :root {
         --tg-bg: #0f172a;
@@ -32,13 +31,11 @@
         --tg-section-bg: #334155;
       }
     }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: var(--tg-bg);
@@ -48,7 +45,6 @@
       -webkit-tap-highlight-color: transparent;
       line-height: 1.5;
     }
-
     header {
       background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
       color: white;
@@ -58,14 +54,12 @@
       z-index: 30;
       box-shadow: 0 4px 16px rgba(99,102,241,0.3);
     }
-
     h1 {
       font-size: 2.1rem;
       font-weight: 800;
       letter-spacing: -0.025em;
       line-height: 1.1;
     }
-
     .tagline {
       font-size: 1.08rem;
       font-weight: 500;
@@ -74,19 +68,16 @@
       -webkit-text-fill-color: transparent;
       margin-top: 0.4rem;
     }
-
     .container {
       padding: 1.25rem 1rem;
       max-width: 960px;
       margin: 0 auto;
     }
-
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 1.375rem;
     }
-
     .product-card {
       background: var(--tg-secondary-bg);
       border-radius: var(--radius);
@@ -96,17 +87,14 @@
       transition: var(--transition);
       position: relative;
     }
-
     .dark .product-card {
       border-color: rgba(59,69,89,0.4);
     }
-
     .product-card:hover,
     .product-card:active {
       transform: translateY(-6px) scale(1.02);
       box-shadow: var(--shadow-md), 0 0 20px rgba(99,102,241,0.15);
     }
-
     .img-wrapper {
       aspect-ratio: 4 / 3;
       background: linear-gradient(135deg, #f0f9ff, #f3e8ff);
@@ -116,40 +104,33 @@
       padding: 1rem;
       overflow: hidden;
     }
-
     .dark .img-wrapper {
       background: linear-gradient(135deg, #1e293b, #312e81);
     }
-
     .product-img {
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
       transition: transform 0.45s ease;
     }
-
     .product-card:hover .product-img {
       transform: scale(1.08) rotate(2deg);
     }
-
     .card-content {
       padding: 1.125rem 1.125rem 1.375rem;
       text-align: center;
     }
-
     .name {
       font-size: 1.34rem;
       font-weight: 700;
       margin-bottom: 0.4rem;
       line-height: 1.25;
     }
-
     .size {
       font-size: 0.96rem;
       color: var(--tg-hint);
       margin-bottom: 0.8rem;
     }
-
     .price {
       font-size: 1.85rem;
       font-weight: 800;
@@ -159,7 +140,6 @@
       margin: 0.5rem 0 1.25rem;
       letter-spacing: -0.02em;
     }
-
     .btn {
       background: linear-gradient(to right, #6366f1, #a855f7);
       color: white;
@@ -173,16 +153,13 @@
       transition: var(--transition);
       box-shadow: 0 3px 12px rgba(99,102,241,0.25);
     }
-
     .btn:hover {
       transform: translateY(-2px) scale(1.02);
       box-shadow: 0 8px 20px rgba(99,102,241,0.35);
     }
-
     .btn:active {
       transform: translateY(0) scale(0.98);
     }
-
     .fixed-cart-bar {
       position: fixed;
       bottom: 0;
@@ -198,18 +175,15 @@
       gap: 1.25rem;
       backdrop-filter: blur(12px);
     }
-
     .dark .fixed-cart-bar {
       border-top-color: rgba(59,69,89,0.5);
     }
-
     .cart-total {
       font-weight: 700;
       font-size: 1.22rem;
       white-space: nowrap;
       flex: 1;
     }
-
     .cart-checkout-btn {
       flex: 0 0 auto;
       min-width: 200px;
@@ -218,7 +192,6 @@
       padding: 1.05rem 1.6rem;
       font-size: 1.15rem;
     }
-
     .empty-state {
       text-align: center;
       padding: 5.5rem 1.5rem 3.5rem;
@@ -226,35 +199,29 @@
       font-size: 1.18rem;
       line-height: 1.6;
     }
-
     .empty-emoji {
       font-size: 4rem;
       margin-bottom: 1.5rem;
       display: block;
     }
-
     @media (min-width: 640px) {
       .container { padding-left: 1.75rem; padding-right: 1.75rem; }
     }
   </style>
 </head>
 <body>
-
 <header>
   <h1>Grace Products</h1>
   <div class="tagline">Natural • Handcrafted • Made with Love 🌿</div>
 </header>
-
 <div class="container">
   <div class="product-grid" id="productGrid"></div>
-
   <div id="emptyState" class="empty-state" style="display: none;">
     <span class="empty-emoji">🛍️🌿✨</span>
     Your cart is empty<br>
     Explore our vibrant natural collection today!
   </div>
 </div>
-
 <div class="fixed-cart-bar" id="cartBar" style="display: none;">
   <div class="cart-total">Total: <span id="totalPrice">Br 0.00</span></div>
   <button class="btn cart-checkout-btn" id="checkoutBtn">View Cart & Checkout</button>
@@ -280,22 +247,21 @@ root.style.setProperty('--tg-theme-button-text-color', theme.button_text_color);
 
 // ────────────────────────────────────────────────
 const products = [
-  { id: 1, name: "Grace Liquid Soap",      size: "5 liter",  price: 500,  img: "https://i.postimg.cc/NM8r0HyP/5l.jpg"    },
-  { id: 2, name: "Grace Hand Wash",        size: "500 ml",   price: 100,  img: "https://i.postimg.cc/zG0y4rss/hand-wash.jpg" },
-  { id: 3, name: "Grace Dettol",           size: "500 ml",   price: 100,  img: "https://i.postimg.cc/SNt0P1Z8/dettol.jpg"   },
-  { id: 4, name: "Grace Bleach",           size: "800 ml",   price: 100,  img: "https://i.postimg.cc/Bn1zVSPf/bll.jpg"      },
-  { id: 5, name: "Grace Bleach Mini",      size: "300 ml",   price: 50,   img: "https://i.postimg.cc/NM8r0HyP/5l.jpg"    },
+  { id: 1, name: "Grace Liquid Soap", size: "5 liter", price: 500, img: "https://i.postimg.cc/NM8r0HyP/5l.jpg" },
+  { id: 2, name: "Grace Hand Wash", size: "500 ml", price: 100, img: "https://i.postimg.cc/zG0y4rss/hand-wash.jpg" },
+  { id: 3, name: "Grace Dettol", size: "500 ml", price: 100, img: "https://i.postimg.cc/SNt0P1Z8/dettol.jpg" },
+  { id: 4, name: "Grace Bleach", size: "800 ml", price: 100, img: "https://i.postimg.cc/Bn1zVSPf/bll.jpg" },
+  { id: 5, name: "Grace Bleach Mini", size: "300 ml", price: 50, img: "https://i.postimg.cc/NM8r0HyP/5l.jpg" },
 ];
 
 let cart = [];
-
+let userPhone = "";   // ← This will be set to 0984748168 when Add to Cart is touched
 // ────────────────────────────────────────────────
-const productGrid   = document.getElementById("productGrid");
-const cartBar       = document.getElementById("cartBar");
-const totalPriceEl  = document.getElementById("totalPrice");
-const checkoutBtn   = document.getElementById("checkoutBtn");
-const emptyState    = document.getElementById("emptyState");
-
+const productGrid = document.getElementById("productGrid");
+const cartBar = document.getElementById("cartBar");
+const totalPriceEl = document.getElementById("totalPrice");
+const checkoutBtn = document.getElementById("checkoutBtn");
+const emptyState = document.getElementById("emptyState");
 // ────────────────────────────────────────────────
 function renderProducts() {
   productGrid.innerHTML = products.map(p => `
@@ -314,7 +280,6 @@ function renderProducts() {
     </div>
   `).join('');
 }
-
 // ────────────────────────────────────────────────
 function updateCartUI() {
   if (cart.length === 0) {
@@ -323,24 +288,18 @@ function updateCartUI() {
     tg.MainButton.hide();
     return;
   }
-
   const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-
   totalPriceEl.textContent = `Br ${total.toFixed(2)}`;
-
   cartBar.style.display = "flex";
   emptyState.style.display = "none";
-
   tg.MainButton.setText(`Checkout — Br ${total.toFixed(2)}`);
   tg.MainButton.setParams({ color: "#10b981", text_color: "#ffffff" });
   tg.MainButton.show();
 }
-
 // ────────────────────────────────────────────────
 productGrid.addEventListener("click", e => {
   const btn = e.target.closest(".add-to-cart");
   if (!btn) return;
-
   const id = Number(btn.dataset.id);
   const product = products.find(p => p.id === id);
   if (!product) return;
@@ -352,28 +311,29 @@ productGrid.addEventListener("click", e => {
     cart.push({ ...product, qty: 1 });
   }
 
-  updateCartUI();
+  // === WHEN ADD TO CART IS TOUCHED → MAKE PHONE NUMBER 0984748168 ===
+  if (!userPhone) {
+    userPhone = "0984748168";
+  }
 
+  updateCartUI();
   tg.HapticFeedback?.impactOccurred("medium");
 });
-
 // ────────────────────────────────────────────────
 tg.MainButton.onClick(() => {
   const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-
   tg.showPopup({
     title: "Order Confirmed 🌟",
-    message: `Total: Br ${total.toFixed(2)}\n\nYour Grace order is being prepared with love! 🌿`,
+    message: `Total: Br ${total.toFixed(2)}\n📞 Phone: ${userPhone}\n\nYour Grace order is being prepared with love! 🌿`,
     buttons: [{ type: "ok", text: "Awesome!" }]
   }, () => {
-    tg.showAlert("Thank you! (demo — cart cleared)");
+    tg.showAlert(`Thank you!\nWe will contact you on ${userPhone} (demo — cart cleared)`);
     cart = [];
+    userPhone = ""; // reset for next order
     updateCartUI();
   });
 });
-
 checkoutBtn.addEventListener("click", () => tg.MainButton.click());
-
 // ────────────────────────────────────────────────
 renderProducts();
 updateCartUI();
