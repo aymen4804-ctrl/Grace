@@ -64,6 +64,7 @@
       font-size: 1.08rem;
       font-weight: 500;
       background: linear-gradient(to right, #e0f2fe, #f3e8ff);
+      -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-top: 0.4rem;
     }
@@ -134,6 +135,7 @@
       font-size: 1.85rem;
       font-weight: 800;
       background: linear-gradient(to right, #10b981, #34d399);
+      -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin: 0.5rem 0 1.25rem;
       letter-spacing: -0.02em;
@@ -253,9 +255,9 @@ const products = [
 ];
 
 let cart = [];
-const SELLER_PHONE = "09848748168";   // ← NEW NUMBER
-let userPhone = "";
-let hasShownCallPrompt = false;       // prevent showing multiple times
+const SELLER_PHONES = ["0963004400", "0912672353"];   // ← UPDATED TO YOUR TWO NUMBERS
+let userPhone = "0963004400 / 0912672353";            // displayed in confirmation
+let hasShownCallPrompt = false;
 // ────────────────────────────────────────────────
 const productGrid = document.getElementById("productGrid");
 const cartBar = document.getElementById("cartBar");
@@ -312,28 +314,23 @@ productGrid.addEventListener("click", e => {
     cart.push({ ...product, qty: 1 });
   }
 
-  // === WHEN ADD TO CART IS TOUCHED → SET PHONE & GIVE OPTION TO CALL ===
-  if (!userPhone) {
-    userPhone = SELLER_PHONE;
-  }
-
-  // Show call prompt ONLY the very first time someone adds something
+  // === WHEN ADD TO CART IS TOUCHED (first time) → show call choice ===
   if (!hasShownCallPrompt) {
     hasShownCallPrompt = true;
     setTimeout(() => {
       tg.showPopup({
         title: "📞 Call Grace Products",
-        message: `✅ Item added!\n\nWould you like to call us right now on\n${SELLER_PHONE}\nto confirm your order?`,
+        message: `✅ Item added!\n\nWhich number would you like to call right now?`,
         buttons: [
-          { id: "call", type: "default", text: "Call Now 📞" },
+          { id: "call1", type: "default", text: "📞 0963004400" },
+          { id: "call2", type: "default", text: "📞 0912672353" },
           { id: "later", type: "cancel", text: "Maybe Later" }
         ]
       }, (buttonId) => {
-        if (buttonId === "call") {
-          tg.openLink(`tel:${SELLER_PHONE}`);
-        }
+        if (buttonId === "call1") tg.openLink(`tel:0963004400`);
+        if (buttonId === "call2") tg.openLink(`tel:0912672353`);
       });
-    }, 650); // tiny delay so user sees the cart update first
+    }, 650);
   }
 
   updateCartUI();
@@ -344,12 +341,11 @@ tg.MainButton.onClick(() => {
   const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
   tg.showPopup({
     title: "Order Confirmed 🌟",
-    message: `Total: Br ${total.toFixed(2)}\n📞 Phone: ${userPhone}\n\nYour Grace order is being prepared with love! 🌿`,
+    message: `Total: Br ${total.toFixed(2)}\n📞 Contact us:\n${SELLER_PHONES[0]}\n${SELLER_PHONES[1]}\n\nYour Grace order is being prepared with love! 🌿`,
     buttons: [{ type: "ok", text: "Awesome!" }]
   }, () => {
-    tg.showAlert(`Thank you!\nWe will contact you on ${userPhone} (demo — cart cleared)`);
+    tg.showAlert(`Thank you!\nWe will call you on one of the numbers above (demo — cart cleared)`);
     cart = [];
-    userPhone = "";
     hasShownCallPrompt = false;
     updateCartUI();
   });
