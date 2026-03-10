@@ -68,6 +68,17 @@
       -webkit-text-fill-color: transparent;
       margin-top: 0.4rem;
     }
+    /* ✨ NEW INTERESTING MOTTO STYLE */
+    .motto {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-top: 0.35rem;
+      letter-spacing: -0.015em;
+      background: linear-gradient(to right, #fefce8, #ecfdf5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      opacity: 0.98;
+    }
     .container {
       padding: 1.25rem 1rem;
       max-width: 960px;
@@ -213,6 +224,8 @@
 <header>
   <h1>Grace Products</h1>
   <div class="tagline">Natural • Handcrafted • Made with Love 🌿</div>
+  <!-- ✨ INTERESTING MOTTO ADDED HERE -->
+  <div class="motto">Clean Naturally • Live Gracefully ✨</div>
 </header>
 <div class="container">
   <div class="product-grid" id="productGrid"></div>
@@ -255,8 +268,7 @@ const products = [
 ];
 
 let cart = [];
-const SELLER_PHONES = ["0963004400", "0912672353"];   // ← UPDATED TO YOUR TWO NUMBERS
-let userPhone = "0963004400 / 0912672353";            // displayed in confirmation
+const SELLER_PHONES = ["0963004400", "0912672353"];
 let hasShownCallPrompt = false;
 // ────────────────────────────────────────────────
 const productGrid = document.getElementById("productGrid");
@@ -314,7 +326,6 @@ productGrid.addEventListener("click", e => {
     cart.push({ ...product, qty: 1 });
   }
 
-  // === WHEN ADD TO CART IS TOUCHED (first time) → show call choice ===
   if (!hasShownCallPrompt) {
     hasShownCallPrompt = true;
     setTimeout(() => {
@@ -341,7 +352,7 @@ tg.MainButton.onClick(() => {
   const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
   tg.showPopup({
     title: "Order Confirmed 🌟",
-    message: `Total: Br ${total.toFixed(2)}\n📞 Contact us:\n${SELLER_PHONES[0]}\n${SELLER_PHONES[1]}\n\nYour Grace order is being prepared with love! 🌿`,
+    message: `Total: Br ${total.toFixed(2)}\n📞 Contact us:\n0963004400\n0912672353\n\nYour Grace order is being prepared with love! 🌿`,
     buttons: [{ type: "ok", text: "Awesome!" }]
   }, () => {
     tg.showAlert(`Thank you!\nWe will call you on one of the numbers above (demo — cart cleared)`);
