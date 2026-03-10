@@ -14,13 +14,13 @@
       --tg-section-bg: var(--tg-theme-section-bg-color, #f1f5f9);
       --tg-accent: var(--tg-theme-button-color, #6366f1);
       --tg-accent-text: var(--tg-theme-button-text-color, #ffffff);
-      --tg-destructive: #ef4444;
       --success: #10b981;
+      --vibrant: #7c3aed;
       --radius: 1.25rem;
       --radius-lg: 1.5rem;
       --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
       --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     @media (prefers-color-scheme: dark) {
@@ -50,27 +50,29 @@
     }
 
     header {
-      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
       color: white;
       padding: 1.25rem 1rem 1.125rem;
       position: sticky;
       top: 0;
       z-index: 30;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 16px rgba(99,102,241,0.3);
     }
 
     h1 {
-      font-size: 2rem;
+      font-size: 2.1rem;
       font-weight: 800;
       letter-spacing: -0.025em;
       line-height: 1.1;
     }
 
     .tagline {
-      font-size: 1.05rem;
+      font-size: 1.08rem;
       font-weight: 500;
-      opacity: 0.95;
-      margin-top: 0.375rem;
+      background: linear-gradient(to right, #e0f2fe, #f3e8ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-top: 0.4rem;
     }
 
     .container {
@@ -82,7 +84,7 @@
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.25rem;
+      gap: 1.375rem;
     }
 
     .product-card {
@@ -101,13 +103,13 @@
 
     .product-card:hover,
     .product-card:active {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: var(--shadow-md), 0 0 20px rgba(99,102,241,0.15);
     }
 
     .img-wrapper {
       aspect-ratio: 4 / 3;
-      background: var(--tg-section-bg);
+      background: linear-gradient(135deg, #f0f9ff, #f3e8ff);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -115,15 +117,19 @@
       overflow: hidden;
     }
 
+    .dark .img-wrapper {
+      background: linear-gradient(135deg, #1e293b, #312e81);
+    }
+
     .product-img {
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
-      transition: transform 0.4s ease;
+      transition: transform 0.45s ease;
     }
 
     .product-card:hover .product-img {
-      transform: scale(1.06);
+      transform: scale(1.08) rotate(2deg);
     }
 
     .card-content {
@@ -132,49 +138,49 @@
     }
 
     .name {
-      font-size: 1.32rem;
+      font-size: 1.34rem;
       font-weight: 700;
-      margin-bottom: 0.375rem;
+      margin-bottom: 0.4rem;
       line-height: 1.25;
     }
 
     .size {
-      font-size: 0.95rem;
+      font-size: 0.96rem;
       color: var(--tg-hint);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.8rem;
     }
 
     .price {
-      font-size: 1.75rem;
+      font-size: 1.85rem;
       font-weight: 800;
-      color: var(--success);
-      margin: 0.5rem 0 1.125rem;
+      background: linear-gradient(to right, #10b981, #34d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0.5rem 0 1.25rem;
       letter-spacing: -0.02em;
     }
 
     .btn {
-      background: var(--success);
+      background: linear-gradient(to right, #6366f1, #a855f7);
       color: white;
       border: none;
-      padding: 0.95rem;
+      padding: 0.98rem;
       border-radius: 1rem;
-      font-size: 1.06rem;
+      font-size: 1.08rem;
       font-weight: 700;
       width: 100%;
       cursor: pointer;
       transition: var(--transition);
-      box-shadow: 0 2px 8px rgba(16,185,129,0.18);
+      box-shadow: 0 3px 12px rgba(99,102,241,0.25);
     }
 
     .btn:hover {
-      background: #059669;
-      transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(16,185,129,0.28);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 20px rgba(99,102,241,0.35);
     }
 
     .btn:active {
-      transform: translateY(0);
-      box-shadow: 0 2px 6px rgba(16,185,129,0.2);
+      transform: translateY(0) scale(0.98);
     }
 
     .fixed-cart-bar {
@@ -184,13 +190,13 @@
       right: 0;
       background: var(--tg-secondary-bg);
       border-top: 1px solid rgba(226,232,240,0.5);
-      padding: 0.95rem 1rem;
-      box-shadow: 0 -6px 20px rgba(0,0,0,0.12);
+      padding: 1rem;
+      box-shadow: 0 -8px 24px rgba(0,0,0,0.15);
       z-index: 100;
       display: flex;
       align-items: center;
-      gap: 1rem;
-      backdrop-filter: blur(10px);
+      gap: 1.25rem;
+      backdrop-filter: blur(12px);
     }
 
     .dark .fixed-cart-bar {
@@ -199,36 +205,36 @@
 
     .cart-total {
       font-weight: 700;
-      font-size: 1.18rem;
+      font-size: 1.22rem;
       white-space: nowrap;
       flex: 1;
     }
 
     .cart-checkout-btn {
       flex: 0 0 auto;
-      min-width: 180px;
-      background: linear-gradient(to right, #10b981, #059669);
-      box-shadow: 0 4px 16px rgba(16,185,129,0.32);
-      padding: 1rem 1.5rem;
-      font-size: 1.12rem;
+      min-width: 200px;
+      background: linear-gradient(to right, #10b981, #34d399, #059669);
+      box-shadow: 0 6px 20px rgba(16,185,129,0.4);
+      padding: 1.05rem 1.6rem;
+      font-size: 1.15rem;
     }
 
     .empty-state {
       text-align: center;
-      padding: 5rem 1.5rem 3rem;
+      padding: 5.5rem 1.5rem 3.5rem;
       color: var(--tg-hint);
-      font-size: 1.15rem;
+      font-size: 1.18rem;
       line-height: 1.6;
     }
 
     .empty-emoji {
-      font-size: 3.5rem;
-      margin-bottom: 1.25rem;
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
       display: block;
     }
 
     @media (min-width: 640px) {
-      .container { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .container { padding-left: 1.75rem; padding-right: 1.75rem; }
     }
   </style>
 </head>
@@ -236,21 +242,21 @@
 
 <header>
   <h1>Grace Products</h1>
-  <div class="tagline">Natural • Handcrafted • Made with Care 🌿</div>
+  <div class="tagline">Natural • Handcrafted • Made with Love 🌿</div>
 </header>
 
 <div class="container">
   <div class="product-grid" id="productGrid"></div>
 
   <div id="emptyState" class="empty-state" style="display: none;">
-    <span class="empty-emoji">🛍️🌱</span>
+    <span class="empty-emoji">🛍️🌿✨</span>
     Your cart is empty<br>
-    Discover our lovingly crafted natural collection
+    Explore our vibrant natural collection today!
   </div>
 </div>
 
 <div class="fixed-cart-bar" id="cartBar" style="display: none;">
-  <div class="cart-total">Total: <span id="totalPrice">$0.00</span></div>
+  <div class="cart-total">Total: <span id="totalPrice">Br 0.00</span></div>
   <button class="btn cart-checkout-btn" id="checkoutBtn">View Cart & Checkout</button>
 </div>
 
@@ -261,10 +267,9 @@ tg.ready();
 tg.expand();
 tg.enableClosingConfirmation?.();
 
-// Apply Telegram theme variables more reliably
+// Apply Telegram theme
 const theme = tg.themeParams;
 const root = document.documentElement;
-
 root.style.setProperty('--tg-theme-bg-color', theme.bg_color);
 root.style.setProperty('--tg-theme-text-color', theme.text_color);
 root.style.setProperty('--tg-theme-hint-color', theme.hint_color);
@@ -301,7 +306,7 @@ function renderProducts() {
       <div class="card-content">
         <div class="name">${p.name}</div>
         <div class="size">${p.size}</div>
-        <div class="price">$${p.price.toFixed(2)}</div>
+        <div class="price">Br ${p.price.toFixed(2)}</div>
         <button class="btn add-to-cart" data-id="${p.id}">
           Add to Cart
         </button>
@@ -321,12 +326,12 @@ function updateCartUI() {
 
   const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 
-  totalPriceEl.textContent = `$${total.toFixed(2)}`;
+  totalPriceEl.textContent = `Br ${total.toFixed(2)}`;
 
   cartBar.style.display = "flex";
   emptyState.style.display = "none";
 
-  tg.MainButton.setText(`Checkout — $${total.toFixed(2)}`);
+  tg.MainButton.setText(`Checkout — Br ${total.toFixed(2)}`);
   tg.MainButton.setParams({ color: "#10b981", text_color: "#ffffff" });
   tg.MainButton.show();
 }
@@ -349,8 +354,7 @@ productGrid.addEventListener("click", e => {
 
   updateCartUI();
 
-  // Optional subtle haptic feedback (Telegram supports it)
-  tg.HapticFeedback?.impactOccurred("light");
+  tg.HapticFeedback?.impactOccurred("medium");
 });
 
 // ────────────────────────────────────────────────
@@ -358,13 +362,11 @@ tg.MainButton.onClick(() => {
   const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
 
   tg.showPopup({
-    title: "Order Confirmed",
-    message: `Total amount: $${total.toFixed(2)}\n\nYour Grace order is being prepared with love 🌿`,
-    buttons: [{ type: "ok", text: "Great!" }]
+    title: "Order Confirmed 🌟",
+    message: `Total: Br ${total.toFixed(2)}\n\nYour Grace order is being prepared with love! 🌿`,
+    buttons: [{ type: "ok", text: "Awesome!" }]
   }, () => {
-    // In production → tg.sendData(JSON.stringify(cart))
-    // tg.close()
-    tg.showAlert("Thank you! (demo mode — cart cleared)");
+    tg.showAlert("Thank you! (demo — cart cleared)");
     cart = [];
     updateCartUI();
   });
