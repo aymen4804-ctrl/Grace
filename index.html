@@ -64,7 +64,6 @@
       font-size: 1.08rem;
       font-weight: 500;
       background: linear-gradient(to right, #e0f2fe, #f3e8ff);
-      -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-top: 0.4rem;
     }
@@ -135,7 +134,6 @@
       font-size: 1.85rem;
       font-weight: 800;
       background: linear-gradient(to right, #10b981, #34d399);
-      -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin: 0.5rem 0 1.25rem;
       letter-spacing: -0.02em;
@@ -255,7 +253,9 @@ const products = [
 ];
 
 let cart = [];
-let userPhone = "";   // ← This will be set to 0984748168 when Add to Cart is touched
+const SELLER_PHONE = "09848748168";   // ← NEW NUMBER
+let userPhone = "";
+let hasShownCallPrompt = false;       // prevent showing multiple times
 // ────────────────────────────────────────────────
 const productGrid = document.getElementById("productGrid");
 const cartBar = document.getElementById("cartBar");
@@ -300,6 +300,7 @@ function updateCartUI() {
 productGrid.addEventListener("click", e => {
   const btn = e.target.closest(".add-to-cart");
   if (!btn) return;
+
   const id = Number(btn.dataset.id);
   const product = products.find(p => p.id === id);
   if (!product) return;
@@ -311,9 +312,28 @@ productGrid.addEventListener("click", e => {
     cart.push({ ...product, qty: 1 });
   }
 
-  // === WHEN ADD TO CART IS TOUCHED → MAKE PHONE NUMBER 0984748168 ===
+  // === WHEN ADD TO CART IS TOUCHED → SET PHONE & GIVE OPTION TO CALL ===
   if (!userPhone) {
-    userPhone = "0984748168";
+    userPhone = SELLER_PHONE;
+  }
+
+  // Show call prompt ONLY the very first time someone adds something
+  if (!hasShownCallPrompt) {
+    hasShownCallPrompt = true;
+    setTimeout(() => {
+      tg.showPopup({
+        title: "📞 Call Grace Products",
+        message: `✅ Item added!\n\nWould you like to call us right now on\n${SELLER_PHONE}\nto confirm your order?`,
+        buttons: [
+          { id: "call", type: "default", text: "Call Now 📞" },
+          { id: "later", type: "cancel", text: "Maybe Later" }
+        ]
+      }, (buttonId) => {
+        if (buttonId === "call") {
+          tg.openLink(`tel:${SELLER_PHONE}`);
+        }
+      });
+    }, 650); // tiny delay so user sees the cart update first
   }
 
   updateCartUI();
@@ -329,7 +349,8 @@ tg.MainButton.onClick(() => {
   }, () => {
     tg.showAlert(`Thank you!\nWe will contact you on ${userPhone} (demo — cart cleared)`);
     cart = [];
-    userPhone = ""; // reset for next order
+    userPhone = "";
+    hasShownCallPrompt = false;
     updateCartUI();
   });
 });
